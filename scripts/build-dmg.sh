@@ -41,6 +41,10 @@ if [ -f "$ICON_FILE" ]; then
 fi
 
 echo -n "APPL????" > "$APP_BUNDLE/Contents/PkgInfo"
+
+# Ad-hoc code sign (prevents "damaged" error on downloaded apps)
+echo "  Signing app..."
+codesign --force --deep -s - "$APP_BUNDLE"
 echo "  App bundle: $APP_BUNDLE"
 
 # Step 3: Prepare DMG staging
